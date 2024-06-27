@@ -18,9 +18,27 @@ enum Locales {
     DE
 }
 
+type RecommendedProductEdge {
+    node: Product!
+    boughtTogetherPercentage: Float
+}
+
+type RecommendedProductConnection {
+    edges: [RecommendedProductEdge]
+    pageInfo: PageInfo!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID!
+    endCursor: ID!
+}
+
 type Product {
     name: String
     description(format: ProductDescriptionFormat = TEXT, locale: Locales = EN): String
+    recommendedProducts(first: Int, after: ID, last: Int, before: ID): RecommendedProductConnection
     imageUrl: String @deprecated(reason: "Use \`image{ url}\` instead")
     image: Image
 }
