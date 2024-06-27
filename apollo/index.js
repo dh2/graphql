@@ -1,9 +1,28 @@
 const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = gql`
+type Image {
+    url: String
+    description: String
+    thumbnailUrl(width: Int, height: Int): String
+}
+
+enum ProductDescriptionFormat {
+    TEXT
+    HTML
+}
+
+enum Locales {
+    EN
+    FR
+    DE
+}
+
 type Product {
     name: String
-    description: String
+    description(format: ProductDescriptionFormat = TEXT, locale: Locales = EN): String
+    imageUrl: String @deprecated(reason: "Use \`image{ url}\` instead")
+    image: Image
 }
 
 type Query {
@@ -13,7 +32,10 @@ type Query {
 }`;
 
 const mocks = {
-    String: () => "Hello"
+    String: () => "Hello",
+    Product: () =>( {
+        imageUrl: () => null
+    })
 }
 
 const resolvers = {
