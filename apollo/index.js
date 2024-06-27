@@ -28,7 +28,20 @@ type RecommendedProductConnection {
     pageInfo: PageInfo!
 }
 
+type PaginationEntry {
+    cursor: ID!
+}
+
 type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID!
+    endCursor: ID!
+}
+
+type ReccommendedProductConnectionPageInfo {
+    hasNextPages(amount: Int!): [PaginationEntry]!
+    hasPreviousPages(amount: Int!): [PaginationEntry]!
     hasNextPage: Boolean!
     hasPreviousPage: Boolean!
     startCursor: ID!
@@ -46,7 +59,8 @@ type Product {
 type Query {
     hello: String
     helloTwo: String
-    product(id: ID!): Product
+    productById(id: ID!): Product
+    productBySlug(slug: String!): Product
 }`;
 
 const mocks = {

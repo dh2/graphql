@@ -3,7 +3,7 @@
 ```graphql
 
 {
-  product(id: "123-4") {
+  productById(id: "123-4") {
     name
     recommendedProducts(first: 5, next: "cde") {
         edges {
@@ -15,6 +15,12 @@
             }
         }
         pageInfo {
+            hasNextPages(amount: 3) {
+                cursor
+            }
+            hasPreviousPages(amount: 3) {
+                cursor
+            }
             hasNextPage
             hasPreviousPage
             endCursor
@@ -35,7 +41,7 @@
 ```json
 
 {
-  "product": {
+  "productById": {
     "name": "Blackbook",
     "recommendedProducts": {
         "edges": {
@@ -48,6 +54,16 @@
         "boughtTogetherPercentage": 5.7
         },
         "pageInfo": {
+            "hasNextPages": [
+                { "cursor": "ert" }
+                { "cursor": "tyu" }
+                { "cursor": "ewq" }
+            ],
+            "hasPreviousPages": [
+                { "cursor": "ert" }
+                { "cursor": "tyu" }
+                { "cursor": "ewq" }
+            ],
             "hasNextPage": true,
             "hasPreviousPage": false,
             "endCursor": null,
