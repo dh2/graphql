@@ -61,7 +61,23 @@ type Query {
     helloTwo: String
     productById(id: ID!): Product
     productBySlug(slug: String!): Product
-}`;
+}
+
+input CreateProductInput {
+    name: String!
+    description: String
+}
+
+type CreateProductPayload {
+    product: Product
+}
+
+type Mutation {
+    createProduct(input: CreateProductInput!): CreateProductPayload!
+}
+
+`;
+
 
 const mocks = {
     String: () => "Hello",
