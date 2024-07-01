@@ -72,8 +72,18 @@ type CreateProductPayload {
     product: Product
 }
 
+input UpdateProductInput {
+    name: String!
+    description: String!
+}
+
+type UpdateProductPayload {
+    product: Product
+}
+
 type Mutation {
     createProduct(input: CreateProductInput!): CreateProductPayload!
+    updateProduct(input: UpateProductInput!): UpdateProductPayload!
 }
 
 `;
